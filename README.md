@@ -23,8 +23,8 @@ This project sets up a webhook server that triggers Raycast's confetti effect wh
 Clone the repository to your server or local machine:
 
 ```bash
-git clone https://github.com/ronilaukkarinen/raycast-confetti.git
-cd raycast-confetti
+git clone https://github.com/ronilaukkarinen/raycast-confetti-server.git
+cd raycast-confetti-server
 ```
 
 ### Install dependencies
