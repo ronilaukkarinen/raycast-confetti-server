@@ -75,6 +75,14 @@ Update the `webhook-server.mjs` file (or `webhook-server.js` if using `"type": "
    sudo systemctl status webhook-server
    ```
 
+### Watch the server output log
+
+To watch the server output log, run:
+
+```bash
+sudo journalctl -u webhook-server -f
+```
+
 ### Configure nginx as a reverse proxy
 
 If you want to use a domain name with your webhook server, you can set up an nginx reverse proxy.
