@@ -160,7 +160,7 @@ Add a cert, test the config and restart nginx.
 
 Each application requires specific settings to trigger the webhook server correctly.
 
-#### Todoist Webhook
+#### Todoist webhook
 
 Use the following `curl` command to create a webhook in Todoist for task completions:
 
@@ -168,7 +168,7 @@ Use the following `curl` command to create a webhook in Todoist for task complet
 curl -X POST https://api.todoist.com/sync/v9/webhook -H "Authorization: Bearer YOUR_TODOIST_API_TOKEN" -d "url=http://raycast-webhooks.yourdomain.com/todoist-webhook" -d "event_name=task:completed"
 ```
 
-#### Pipedrive Webhook
+#### Pipedrive webhook
 
 1. Log into your **Pipedrive** account.
 2. Go to **Tools and Apps > Webhooks**.
@@ -178,7 +178,7 @@ curl -X POST https://api.todoist.com/sync/v9/webhook -H "Authorization: Bearer Y
    - **Object**: `deal`
 4. Save the webhook.
 
-#### Height.app Webhook
+#### Height.app webhook
 
 1. Log into your **Height.app** account.
 2. Go to **Settings > Integrations > Webhooks**.
@@ -187,7 +187,7 @@ curl -X POST https://api.todoist.com/sync/v9/webhook -H "Authorization: Bearer Y
    - **Event Type**: `task.updated`
 4. Save the webhook.
 
-### Testing the Webhooks
+### Testing the webhooks
 
 Once the webhooks are set up, you can test them by:
 
