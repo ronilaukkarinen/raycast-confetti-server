@@ -25,6 +25,9 @@ app.post("/todoist-webhook", async (req, res) => {
 app.post("/pipedrive-webhook", async (req, res) => {
   const { event, current } = req.body;
 
+  // Log events
+  console.log(`Incoming Pipedrive webhook: ${event}`);
+
   // Check if the event is a deal update and the deal status is "won"
   if (event === "updated.deal" && current.status === "won") {
     console.log("Deal won in Pipedrive! 🎉");
@@ -37,6 +40,9 @@ app.post("/pipedrive-webhook", async (req, res) => {
 // Height.app webhook handler
 app.post("/height-webhook", async (req, res) => {
   const eventType = req.headers["x-height-event-type"];
+
+  // Log events
+  console.log(`Incoming Height.app webhook: ${eventType}`);
 
   if (eventType === "task.completed") {
     console.log("Task completed in Height.app! 🎉");
