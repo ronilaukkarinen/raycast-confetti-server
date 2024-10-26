@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Todoist webhook handler
 app.post("/todoist-webhook", async (req, res) => {
-  if (req.body.event_name === "task:completed") {
+  if (req.body.event_name === "item:completed") {
     console.log("Task completed in Todoist! 🎉");
     await triggerConfetti();
   }

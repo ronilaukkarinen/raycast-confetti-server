@@ -165,7 +165,13 @@ Each application requires specific settings to trigger the webhook server correc
 Use the following `curl` command to create a webhook in Todoist for task completions:
 
 ```bash
-curl -X POST https://api.todoist.com/sync/v9/webhook -H "Authorization: Bearer YOUR_TODOIST_API_TOKEN" -d "url=http://raycast-webhooks.yourdomain.com/todoist-webhook" -d "event_name=task:completed"
+curl -X POST https://api.todoist.com/rest/v2/webhooks \
+-H "Authorization: Bearer YOUR_TODOIST_API_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{
+      "url": "http://raycast-webhooks.yourdomain.com/todoist-webhook",
+      "event_name": "task:completed"
+    }'
 ```
 
 #### Pipedrive webhook
