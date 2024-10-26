@@ -109,11 +109,11 @@ server {
     add_header Strict-Transport-Security max-age=15768000;
 
     location /.well-known {
-        alias /var/www/relay.fedionfire.stream/public_html/.well-known;
+        alias /var/www/raycast-webhooks.yourdomain.com/public_html/.well-known;
     }
 
     location /.well-known/ {
-       root /var/www/relay.fedionfire.stream/public_html;
+       root /var/www/raycast-webhooks.yourdomain.com/public_html;
     }
 
     location / {
