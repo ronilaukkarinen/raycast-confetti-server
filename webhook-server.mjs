@@ -16,7 +16,7 @@ app.post("/todoist-webhook", async (req, res) => {
 
   if (req.body.event_name === "item:completed") {
     console.log("Task completed in Todoist! 🎉");
-    await triggerConfetti();
+    triggerConfetti();
   }
   res.status(200).send("Todoist webhook received");
 });
@@ -24,14 +24,11 @@ app.post("/todoist-webhook", async (req, res) => {
 // Pipedrive webhook handler
 app.post("/pipedrive-webhook", async (req, res) => {
   const { event, current } = req.body;
-
-  // Log events
   console.log(`Incoming Pipedrive webhook: ${event}`);
 
-  // Check if the event is a deal update and the deal status is "won"
   if (event === "updated.deal" && current.status === "won") {
     console.log("Deal won in Pipedrive! 🎉");
-    await triggerConfetti();
+    triggerConfetti();
   }
 
   res.status(200).send("Pipedrive webhook received");
@@ -40,32 +37,31 @@ app.post("/pipedrive-webhook", async (req, res) => {
 // Height.app webhook handler
 app.post("/height-webhook", async (req, res) => {
   const eventType = req.headers["x-height-event-type"];
-
-  // Log events
   console.log(`Incoming Height.app webhook: ${eventType}`);
 
   if (eventType === "task.completed") {
     console.log("Task completed in Height.app! 🎉");
-    await triggerConfetti();
+    triggerConfetti();
   }
   res.status(200).send("Height webhook received");
 });
 
-// Function to trigger Raycast confetti
+// Function to trigger Raycast confetti across multiple URLs asynchronously
 async function triggerConfetti() {
-  const confettiUrl = process.env.CONFETTI_URL;
-  if (!confettiUrl) {
-    console.error("Confetti URL is not defined in the environment variables.");
+  const urls = [process.env.CONFETTI_URL, process.env.CONFETTI_URL_2, process.env.CONFETTI_URL_3].filter(Boolean);
+
+  if (urls.length === 0) {
+    console.error("No confetti URLs defined in the environment variables.");
     return;
   }
 
   try {
-    const response = await fetch(confettiUrl, { method: "POST" });
-    if (response.ok) {
-      console.log("Confetti triggered successfully on Mac!");
-    } else {
-      console.error("Failed to trigger confetti:", response.statusText);
-    }
+    // Trigger each URL without awaiting, so they fire off as close to simultaneously as possible
+    const requests = urls.map(url => fetch(url, { method: "POST" }));
+    await Promise.all(requests);  // Await all fetch calls in parallel
+
+    console.log("Confetti triggered successfully on all URLs! 🎉");
+
   } catch (error) {
     console.error("Error triggering confetti:", error.message);
   }
